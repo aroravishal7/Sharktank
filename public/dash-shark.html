@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var activeuser1=localStorage.getItem("activeuser1");
+    $("#wuser").html("welcome:"+activeuser1);
+    alert(activeuser1);
+    $("#btnlogout").click(function(){
+      localStorage.removeItem("activeuser1");
+     // window.location.replace="index.html";
+    })
+  })
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    dofillemail();
+  function dofillemail()
+  {
+   
+    var activeuser1=localStorage.getItem("activeuser1");
+    document.querySelector("#txtemail").value=activeuser1;
+  }
+})
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="pic/st.jpg" alt="" style="height: 50px;width: 50px;">
+          </a>
+          <span id="wuser"></span>
+         
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" ></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+              
+              </li>
+              <li class="nav-item">
+             
+              </li>
+              <li class="nav-item dropdown">
+               
+                <ul class="dropdown-menu">
+           
+                </ul>
+              </li>
+              <li class="nav-item">
+                
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              
+              <button class="btn btn-outline-success" type="submit" id="btnlogout">LogOut</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+         
+      <div class="container text-center">
+        <div class="row">
+          <div class="col"><div class="card" style="width: 10rem; height: 10rem;">
+            <img src="pic/adminnnn.jpg" class="card-img-top" alt="..." >
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+             <a href="shark-profile.html"> <input type="button"  class="btn btn-success" value="SharkProfile"> </a>
+            </div>
+          </div></div>
+          <div class="col"><div class="card" style="width: 10rem;height: 10rem;">
+            <img src="pic/adminnnn.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="pitcher-finder.html"> <input type="button"  class="btn btn-success" value="Pitcher Finder"> </a>
+            </div>
+          </div></div>
+          <div class="col"><div class="card" style="width: 10rem;height: 10rem;">
+            <img src="pic/adminnnn.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="allpitcher.html"> <input type="button"  class="btn btn-success" value="Find pithcher using city"> </a>
+            </div>
+          </div></div>
+          <div class="col"><div class="card" style="width: 10rem; height: 10rem;">
+            <img src="pic/adminnnn.jpg" class="card-img-top" alt="..." >
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+               <input type="button" data-bs-toggle="modal"  class="btn btn-success" data-bs-target="#changepwd" value="Change password"> 
+            </div>
+          </div></div>
+        </div>
+
+    <form method="post" enctype="multipart/form-data">
+      <div class="modal fade" id="changepwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="name@example.com">
+                        <label for="floatingInput">Email address:</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="txtpwd" name="txtpwd" placeholder="Password">
+                        <label for="floatingPassword">OldPassword:</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="password" class="form-control" id="txtpwd1" name="txtpwd1" placeholder="Password">
+                      <label for="floatingPassword">NewPassword:</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="txtpwd2" name="txtpwd2" placeholder="Password">
+                    <label for="floatingPassword">Confirm:</label>
+                </div>
+                    <div class="form-floating mt-3">
+                     
+                       
+                    </div>
+                </div>
+                <div class="modal-footer d-grid mx-auto">
+
+                    <input type="submit" value="Change Password" formaction="/do-changee">
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+</body>
+</html>

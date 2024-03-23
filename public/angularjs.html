@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var module=angular.module("myModule",[]);
+        module.controller("myController",function($scope,$http){
+            $scope.uname="vishal arora";
+       
+        $scope.dojoin=function(){
+            $scope.full=$scope.fn+" "+$scope.ln;
+        }
+        $scope.dototal=function(){
+            var cn=Number($scope.cn||0);
+            var jn=Number($scope.jn||0);
+            var dn=Number($scope.dn||0);
+            $scope.tot=cn+jn+dn;
+        }
+        $scope.doper=function()
+        {
+            $scope.perr=($scope.tot/300)*100;
+        }
+        $scope.doresult=function()
+        {
+            if($scope.perr>=33)
+            $scope.res="pass";
+        else
+        $scope.res="fail";
+        }
+        $scope.jsonarraydup=[
+            {email:"bcebti@gmail.com",pwd:'admin123',picname:'x.jpg'},
+            {email:"bti@gmail.com",pwd:'admin123',picname:'xx.jpg'},
+            {email:"bce@gmail.com",pwd:'admin123',picname:'x.jpg'}
+        ]
+        $scope.fetchallrecords=function()
+        {
+            const url="/show-all";
+            $http.get(url).then(done,fail);
+            function done(response)
+            {
+                $scope.jsonarrayfilter=response.data;
+            }
+            function fail(err)
+            {
+                alert(err.data);
+            }
+        }
+        $scope.fetchallemails=function()
+        {
+            const url="/fetchemails";
+            $http.get(url).then(done,fail);
+            function done(response)
+            {
+                alert(JSON.stringify(response.data));
+                $scope.jsonarrayemails=response.data;
+            }
+            function fail(err)
+            {
+                alert(err.data);
+            }
+        }
+        $scope.doshowselected=function()
+        {
+          //  alert(JSON.stringify($scope.selobj));
+            //$scope.jsonarrayfilter=[$scope.selobj];
+            const url="/fetch-one?emailid="+$scope.selobj.emailid;
+            $http.get(url).then(done,fail);
+            function done(response)
+            {
+                alert(JSON.stringify(response.data));
+                $scope.jsonarrayfilter=response.data;
+            }
+            function fail(err)
+            {
+               alert(err.data); 
+            }
+        }
+
+    })
+    </script>
+</head>
+<body ng-app="myModule" ng-controller="myController" ng-init="fetchallrecords();fetchallemails();">
+    {{uname}} 
+    <br>
+    <input type="text" ng-model="uname">
+    <hr>
+    <p>
+        f.name: <input type="text" ng-model="fn"> <!--fn model/var is created in scope-->
+    </p>
+    <p>
+        l.name: <input type="text" ng-model="ln"> <!--ln model/var is created in scope-->
+    </p>
+    <p>
+        <input type="button" value="join" ng-click="dojoin();">
+    </p>
+    <p>
+        fullname={{full}}
+    </p>
+<hr>
+<p>
+c++: <input type="text" ng-model="cn">
+</p>
+<p>
+    java: <input type="text" ng-model="jn">
+</p>
+<p>
+    dsa: <input type="text" ng-model="dn">
+</p>
+<p>
+<input type="button" value="total" ng-click="dototal();">
+<input type="button" value="per" ng-click="doper();">
+<input type="button" value="result" ng-click="doresult();">
+
+</p>
+<p>
+    total={{tot}}
+</p>
+<p>
+    percentage={{perr}}
+</p>
+<p>
+    result={{res}}
+</p>
+<hr>
+<center>
+    all records
+    <hr>
+    <table width="600" border="1">
+        <tr>
+            <th>Sr.no</th>
+            <th>email</th>
+            <th>password</th>
+            <th>picname</th>
+            
+        </tr>
+        <tr ng-repeat="obj in jsonarraydup">
+            <td>{{$index+1}}</td>
+            <td>{{obj.email}}</td>
+            <td>{{obj.pwd}}</td>
+            <td>{{obj.picname}}</td>
+           
+        </tr>
+
+    </table>
+</center>
+<hr>
+<center>
+    <select ng-options="obj.emailid for obj in jsonarrayemails" ng-model="selobj" ng-change="doshowselected();">
+        <option value="">Select</option>
+    </select>
+    <hr>
+
+    all records
+    <hr>
+    <table width="600" border="1">
+        <tr>
+            <th>Sr.no</th>
+            <th>email</th>
+            <th>password</th>
+            <th>picname</th>
+            
+        </tr>
+        <tr ng-repeat="obj in jsonarraydup">
+            <tr ng-repeat="obj in jsonarraydup">
+                <td align="center">{{$index+1}}</td>
+                <td align="center">{{obj.emailid}}</td>
+                <td align="center">{{obj.utype}}</td>
+                <td align="center">{{obj.status}}</td>
+        </tr>
+
+</body>
+</html>

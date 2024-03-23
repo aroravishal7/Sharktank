@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function doPrev(reffile,previmg)
+    {
+        const [file]=reffile.files
+        if (file){
+            previmg.src=URL.createObjectURL(file)
+        }
+    }
+</script>
+<script>
+  function dofillemail()
+  {
+    var activeuser=localStorage.getItem("activeuser");
+    document.querySelector("#email2").value=activeuser;
+  }
+</script>
+<script>
+  $(document).ready(function(){
+    dofillemail();
+  function dofillemail()
+  {
+   
+    var activeuser=localStorage.getItem("activeuser");
+    document.querySelector("#email2").value=activeuser;
+    fetchallrecord();
+  }
+  $("#search").click(function(){
+   
+  })
+    function fetchallrecord(){
+      var emailid=$("#email2").val();
+      var obj={
+        type:"get",
+        url:"/get-user-json",
+        data:{
+          email:emailid
+        }
+      }
+      $.ajax(obj).done(function(jsonObjAry){
+        if(jsonObjAry.length==1)
+        {
+          alert(JSON.stringify(jsonObjAry));
+          $("#em").val(jsonObjAry[0].emailid);
+          $("#txtname").val(jsonObjAry[0].name);
+          $("#txtnumber").val(jsonObjAry[0].contact);
+          $("#txtaddress").val(jsonObjAry[0].address);
+          $("#txtcity").val(jsonObjAry[0].city);
+          $("#txtstate").val(jsonObjAry[0].state);
+          $("#txtid").val(jsonObjAry[0].idproof);
+          $("#prev").prop("src","uploads/"+jsonObjAry[0].proofpic);
+          $("#txtfirm").val(jsonObjAry[0].firm);
+          $("#txtlinkedin").val(jsonObjAry[0].linkedin);
+          $("#hdn").val(jsonObjAry[0].proofpic);  
+          document.querySelector("#txtb").disabled=false;
+        }
+        else
+        {
+        alert("invalid user");
+        document.querySelector("#txta").disabled=false;
+        }
+      }).fail(function(errRespStr){
+        alert(errRespStr);
+      })
+    }
+  })
+</script>
+<style>
+    .btn7{
+margin-top: 49px;
+    }
+    /* .navbar{
+      color: chartreuse;
+    } */
+</style>
+</head>
+<body >
+  <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Pitcher Profile</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            
+          </li>
+          <li class="nav-item">
+          
+          </li>
+          <li class="nav-item dropdown">
+            
+            <ul class="dropdown-menu">
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+           
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          Welcome: <input class="form-control me-2" type="email" placeholder="user" aria-label="Search">
+     
+        </form>
+      </div>
+    </div>
+  </nav>
+     <form class="row g-3"  method="post" enctype="multipart/form-data">
+      
+        <div class="col-md-6">
+          <input type="hidden" id="hdn" name="hdn">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email2" name="email2" readonly> 
+        </div>
+         <div class=" btn7 col-md-6">
+          <input type="button" name="" id="search" value="Search">
+        </div> 
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Name</label>
+            <input type="text" class="form-control" id="txtname" name="txtname">
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Contact Number:</label>
+            <input type="number" class="form-control" id="txtnumber" name="txtnumber">
+          </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="txtaddress" name="txtaddress" placeholder="1234 Main St">
+        </div>
+       
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" id="txtcity" name="txtcity">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="txtstate" class="form-select" name="txtstate">
+            <option selected>Choose...</option>
+            <option>punjab</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Id-proof</label>
+            <select id="txtid" class="form-select" name="txtid">
+              <option selected>Choose...</option>
+              <option>98876</option>
+            </select>
+          </div>
+       
+          <div class="col-md-2">
+            <p>Upload profile pic:
+                <input type="file" name="ppic"  onchange="doPrev(this,prev)">
+            </p>
+          </div>
+          <div class="col-md-4">
+            
+           &nbsp;&nbsp; <img src="" alt="" id="prev" width="100" height="100">
+          </div>
+          
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Firm/Company Website</label>
+            <input type="text" class="form-control" id="txtfirm" name="txtfirm"   placeholder="1234 Main St">
+          </div>
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">LinkedIn Profile</label>
+            <input type="text" class="form-control" id="txtlinkedin" name="txtlinkedin" placeholder="1234 Main St">
+          </div>
+        <center>
+            <button type="submit" class="btn btn-primary" disabled id="txta" value="save data" formaction="/saved">Saved data</button>
+            <button type="submit"  class="btn btn-primary" disabled id="txtb" value="update data" formaction="/updated">Update data</button>
+        </center>
+      </form>
+</body>
+</html>
